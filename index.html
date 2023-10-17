@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+
+    <title>Web Builder</title>
+</head>
+<body id="body">    
+    <nav id="nav">
+        <h2>Elements</h2>
+        <hr>
+        <br>
+
+        <h3>Headings</h3>
+        <br>
+        <button id="h1btn" data-type="element" data-name="h1">Heading One</button>
+        <button id="h2btn" data-type="element" data-name="h2">Heading Two</button>
+        <button id="h3btn" data-type="element" data-name="h3">Heading Three</button>
+        <button id="h4btn" data-type="element" data-name="h4">Heading Four</button>
+        <button id="h5btn" data-type="element" data-name="h5">Heading Five</button>
+        <button id="h6btn" data-type="element" data-name="h6">Heading Six</button>
+    </nav>
+
+    <section id="container">
+
+    </section>
+
+    <section id="advanced">
+        <h2>Element Editor</h2>
+        <button id="codeBtn">Get Code</button>
+
+        <section id="elemEditor">
+
+        </section>
+    </section>
+
+    <div id="modal">
+        <h2>Code</h2>
+        <button id="modalClose">Close</button>
+
+<pre><code id="codeBox">
+</code></pre>
+
+    </div>
+
+    <script type="module" src="./script.js"></script>
+</body>
+</html>
