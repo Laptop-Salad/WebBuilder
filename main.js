@@ -1,4 +1,5 @@
 import { mapElemCreator } from "./elemCreator.js";
+import { getCode } from "./getCode.js";
 
 const nav = document.getElementById("nav");
 const elemButtons = nav.querySelectorAll("button");
@@ -9,11 +10,15 @@ const codeBox = document.getElementById("codeBox");
 const modal = document.getElementById("modal");
 const modalClose = document.getElementById("modalClose");
 
-let IdCount = 0
+let IdCount = 0;
 
 let currTarget = null;
 
 let elemsTracker = {};
+
+let originalDisplay = ""
+
+let elemTaps = 0;
 
 modalClose.addEventListener("click", function () {
     /**
@@ -27,35 +32,14 @@ codeBtn.addEventListener("click", function () {
      * If get code button is clicked, open modal and get code
      */
     modal.style.display = "block";
-    codeBox.innerHTML = getCode();
+    codeBox.innerHTML = getCode(elemsTracker);
 })
-
-function getCode() {
-    /**
-     * Generate code
-     */
-    let str = "";
-
-    for (let key in elemsTracker) {
-        let details = elemsTracker[key];
-        let cssInline = details.getStyle;
-        let outer = details.elem.outerHTML;
-
-        let indexFirstClose = outer.indexOf(">");
-        let elemStr = outer.slice(0, indexFirstClose) + " " + 
-        cssInline + " " + outer.slice(indexFirstClose) + " ";
-
-        str += elemStr.replace(/</g, '&lt;').replace(/>/g, '&gt;') + "\n";
-    }
-
-    return str;
-}
 
 function checkClickOutside(event) {
     /**
      * If an element is being targeted, and another element or the container is clicked, remove target
      */
-    if (currTarget && !event.target.closest(currTarget.nodeName) && event.target.id == "container") {
+    if (currTarget && !event.target.closest(currTarget.nodeName) && event.target.id != currTarget.id && event.target.id == "container") {    
         clearTarget();
     }
 }
@@ -66,7 +50,12 @@ function clearTarget() {
      */
     if (currTarget) {
         currTarget.style.border = "none"; 
-        currTarget = null;   
+        currTarget.style.display = originalDisplay;
+        document.getElementById("container").removeEventListener("mousemove", moveElement);
+        currTarget.removeEventListener("mousedown", startMove);
+        currTarget.removeEventListener("mouseup", endMove);
+        currTarget.addEventListener("click", targetElem);
+        currTarget = null;  
         document.removeEventListener("click", checkClickOutside);
         elemEditor.innerHTML = "";
     }
@@ -75,6 +64,8 @@ function clearTarget() {
 function setTarget(elem) {
     currTarget = elem;
     elem.style.border = "2px solid red";
+    originalDisplay = elem.style.display;
+    elem.style.display = "inline";
 }
 
 function loadEditor(elem) {
@@ -124,25 +115,66 @@ function removeElem(elem) {
     delete elemsTracker[elem];
 }
 
-function moveElem(event) {
+function moveElement(event) {
+    let x = event.clientX;
+    let y = event.clientY;
+
+    if (event.clientX >= nav.offsetWidth + container.offsetWidth - currTarget.offsetWidth) {
+        return;
+    }
+
+    currTarget.style.top = y + "px";
+    currTarget.style.left = x + "px";
+}
+
+function startMove(event) {    
+    event.target.style.position = "absolute";
+
+    let x = event.clientX;
+    let y = event.clientY;
+    currTarget.style.top = y + "px";
+    currTarget.style.left = x + "px";
+    
+    document.getElementById("container").addEventListener("mousemove", moveElement);
+    currTarget.removeEventListener("click", targetElem);
+    currTarget.removeEventListener("mousedown", startMove);
+    currTarget.addEventListener("mouseup", endMove);
+}
+
+function endMove() {
+    let elemClass = elemsTracker[currTarget.id];
+    elemClass.position = "absolute";
+    elemClass.x = currTarget.style.left;
+    elemClass.y = currTarget.style.top;
+    clearTarget();
+}
+
+function targetElem(event) {
     /**
      * Target and element when clicked and populate element editor
      */
+    elemEditor.innerHTML = "";
+
     clearTarget();
 
-    setTarget(event.target)
+    setTarget(event.target);
 
     loadEditor(currTarget.id);
+    currTarget.removeEventListener("click", targetElem);
 
-    document.addEventListener("click", function (event) {
-        checkClickOutside(event);
-    })
+
+    document.addEventListener("click", checkClickOutside);
+
+    elemTaps = 1;
+
+    currTarget.addEventListener("mousedown", startMove);
 }
 
 function store(elem) {
     /**
      * Create and store a new element created by the user
      */
+
 
     elemsTracker[elem.elem.id] = elem; 
 
@@ -152,11 +184,9 @@ function store(elem) {
 function addJSData(elem) {
     if (elem) {
         elem.elem.id = IdCount;
+        IdCount += 1
         
-        elem.elem.addEventListener("click", function (event) {
-            elemEditor.innerHTML = "";
-            moveElem(event);
-        });
+        elem.elem.addEventListener("click", targetElem);
     }
 }
 

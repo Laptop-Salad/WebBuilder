@@ -1,4 +1,4 @@
-import { Heading, Paragraph } from "./elementsClasses.js";
+import { Heading } from "./elementsClasses.js";
 
 const headings = ["h1", "h2", "h3", "h4", "h5", "h6"];
 const headingsConfig = {
