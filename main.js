@@ -92,8 +92,12 @@ function loadEditor(elem) {
         label.innerHTML = key;
         label.setAttribute("for", key);
         input.value = details[key];
-        elemEditor.append(label);
-        elemEditor.append(input);
+
+        let container = document.createElement("div");
+        container.append(label);
+        container.append(input);
+        
+        elemEditor.append(container);
     }
 
     let deleteBtn = document.createElement("button");

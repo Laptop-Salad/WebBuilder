@@ -1,0 +1,136 @@
+:root {
+    --mint: #DBE8D8;
+    --yellow: #FEDE00;
+    --dgreen: #0A7029;
+    --ygreen: #C8DF52;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Colours - Background */
+.duck {
+    background-color: var(--yellow);
+}
+
+.grass {
+    background-color: var(--dgreen);
+}
+
+.swamp-water {
+    background-color: var(--mint);
+}
+
+.duckweed {
+    background-color: var(--ygreen);
+}
+
+/* Colours */
+#colours > div {
+    margin: 1% 0;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Buttons */
+.btn {
+    cursor: pointer;
+    border: transparent;
+    border-radius: 5px;
+}
+
+.btn.sm {
+    padding: 5px 20px;
+}
+
+.btn.md {
+    padding: 10px 20px;
+}
+
+.btn.lg {
+    padding: 15px 40px;
+}
+
+/* Progress bars */
+#progressBars  > * {
+    margin: 1% 0;
+}
+
+.progress {
+    width: 100%;
+    height: 20px;
+    border-radius: 5px;
+    background-color: var(--mint);
+    content: "";
+    overflow: hidden; 
+}
+
+.progress div {
+    height: 100%;
+    background-color: var(--yellow);
+}
+
+/* Modals */
+.modal {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin: auto auto;
+    width: 50%;
+    height: 20%;
+    border: transparent;
+    border-radius: 2px;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Accordions */
+.accordion-group .accordion {
+    padding: 5px;
+}
+
+.accordion-group .accordion .header {
+    width: 100%;
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+}
+
+.accordion-group .accordion .header .arrow {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: end;
+    overflow: hidden;
+}
+
+.accordion-group .accordion .header img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 1s;
+    position: relative;
+}
+
+.arrow-up {
+    transform: rotate(0deg);
+}
+
+.arrow-down {
+    transform: rotate(180deg);
+}
+
+.accordion-group .accordion .content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+/* Media queries */
+@media only screen and (max-width: 600px) {
+    .modal {
+        width: 75%;
+        height: 20%;
+    }
+}

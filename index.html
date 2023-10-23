@@ -10,25 +10,44 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon//favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="keith.css">
     <link rel="stylesheet" href="styles.css">
+
     
     <title>Web Builder</title>
 </head>
 <body id="body">    
-    <nav id="nav">
+    <nav id="top">
+        <h1>WebBuilder</h1>
+        <button id="codeBtn" class="white-button">Get Code</button>
+    </nav>
+
+    <section id="nav">
         <h2>Elements</h2>
-        <hr>
         <br>
 
-        <h3>Headings</h3>
-        <br>
-        <button id="h1btn" data-type="element" data-name="h1">Heading One</button>
-        <button id="h2btn" data-type="element" data-name="h2">Heading Two</button>
-        <button id="h3btn" data-type="element" data-name="h3">Heading Three</button>
-        <button id="h4btn" data-type="element" data-name="h4">Heading Four</button>
-        <button id="h5btn" data-type="element" data-name="h5">Heading Five</button>
-        <button id="h6btn" data-type="element" data-name="h6">Heading Six</button>
-    </nav>
+        <div class="accordion-group">
+            <div class="accordion" aria-expanded="false" tabindex="0">
+                <div class="header">
+                    <p class="title">Headings</p>
+                </div>
+                <div class="content">
+                    <button id="h1Btn" data-type="element" data-name="h1">Heading One</button>
+                    <button id="h2Btn" data-type="element" data-name="h2">Heading Two</button>
+                    <button id="h3Btn" data-type="element" data-name="h3">Heading Three</button>
+                    <button id="h4Btn" data-type="element" data-name="h4">Heading Four</button>
+                    <button id="h5Btn" data-type="element" data-name="h5">Heading Five</button>
+                    <button id="h6Btn" data-type="element" data-name="h6">Heading Six</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="container">
 
@@ -36,7 +55,6 @@
 
     <section id="advanced">
         <h2>Element Editor</h2>
-        <button id="codeBtn">Get Code</button>
 
         <section id="elemEditor">
 
@@ -45,7 +63,7 @@
 
     <div id="modal">
         <h2>Code</h2>
-        <button id="modalClose">Close</button>
+        <button id="modalClose" class="black-button">Close</button>
 
 <pre><code id="codeBox">
 </code></pre>
@@ -53,5 +71,6 @@
     </div>
 
     <script type="module" src="./main.js"></script>
+    <script src="keith.js"></script>
 </body>
 </html>

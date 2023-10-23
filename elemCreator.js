@@ -32,7 +32,7 @@ function createHeading (elemName) {
     let elem;
     elem = document.createElement(elemName);
     elem.innerHTML = headingsConfig[elemName]["text"];
-    return new Heading(elem, headingsConfig[elemName]["text"]);
+    return new Heading(elem, headingsConfig[elemName]["fontSize"]);
 }
 
 export function mapElemCreator (elemName) {

@@ -5,13 +5,65 @@
 
 body {
     display: grid;
-    grid-template: 1fr / 1fr 2fr 1fr;
+    grid-template: 1fr 10fr / 1fr 2fr 1fr;
     width: 100%;
+    min-height: 100vh;
+    font-family: 'Gabarito', sans-serif;
+}
+
+/* Colours */
+#nav, #advanced {
+    background-color: #313131;
+    color: white;
+}
+
+#top {
+    background-color: #0f0f0f;
+    color: white;
+}
+
+/* Grid */
+#top {
+    grid-column: 1 / 4;
+    grid-row: 1;
+}
+
+#nav, #container, #advanced {
+    grid-row: 2;
+}
+
+/* Basic Components */
+.white-button {
+    background-color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.white-button:hover {
+    background-color: whitesmoke;
+    cursor: pointer;
+}
+
+.black-button {
+    background-color: #0f0f0f;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.black-button:hover {
+    background-color: black;
+    cursor: pointer;
+}
+
+#nav {
     min-height: 100vh;
 }
 
-nav {
-    height: 100vh;
+#nav h3 {
+    margin: 10px 0;
 }
 
 #container {
@@ -20,8 +72,11 @@ nav {
     overflow: hidden;
 }
 
+#container * {
+    font-family: serif;
+}
+
 #advanced {
-    background-color: whitesmoke;
     height: 100vh;
     padding: 20px;
     box-sizing: border-box;
@@ -49,7 +104,6 @@ img {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);  
     position: absolute;
-    border-radius: 5px;
     box-sizing: border-box;
 }
 
@@ -58,18 +112,92 @@ img {
 }
 
 /* Buttons */
-nav {
-    background-color: whitesmoke;
+#nav {
     padding: 20px;
     box-sizing: border-box;
 }
 
-nav button {
+#nav button {
     display: block;
     background-color: transparent;
     border: transparent;
 }
 
-nav button:hover {
+#nav button:hover {
     cursor: pointer;
+}
+
+/* Accordion */
+.accordion {
+    background-color: white; 
+    color: black;
+}
+
+.accordion:hover {
+    cursor: pointer;
+}
+
+/* Headings */
+#h1Btn {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+#h2Btn {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+#h3Btn {
+    font-size: 1.17em;
+    font-weight: 700;;
+}
+
+#h4Btn {
+    font-size: 1em;
+    font-weight: 700;;
+}
+
+#h5Btn {
+    font-size: 0.83em;
+    font-weight: 700;;
+}
+
+#h6Btn {
+    font-size: 0.67em;
+    font-weight: 700;;
+}
+
+/* Element Editor */
+#advanced {
+    display: flex;
+    flex-direction: column;
+}
+
+#advanced div {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+    margin: 10px 0;
+}
+
+#advanced input {
+    border: transparent;
+    padding: 5px;
+    border-radius: 1px;
+}
+
+#advanced input:focus {
+    outline: transparent;
+}
+
+/* Top */
+#top {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#top > * {
+    margin: 0 10px;
 }

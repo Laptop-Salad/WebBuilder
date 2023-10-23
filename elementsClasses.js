@@ -43,7 +43,7 @@ export class Heading {
         return "style='" + 
         "color: " + this.color + ";" + 
         "font-size: " + this.fontSize + ";" + 
-        "align: " + this.align + ";" + 
+        "text-align: " + this.align + ";" + 
         "position: " + this.position + ";" +
         "top: " + this.y + ";" + 
         "left: " + this.x + ";'";
@@ -120,4 +120,4 @@ export class Heading {
             }
         }
     }
-}
+} 
