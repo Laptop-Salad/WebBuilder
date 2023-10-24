@@ -82,7 +82,7 @@ function loadEditor(elem) {
         input.setAttribute("type", "text");
         input.setAttribute("id", key);
 
-        input.addEventListener("keypress", function (event) {
+        input.addEventListener("keydown", function (event) {
             if (event.key === "Enter") {
                 details.updateMapper(key, event.target.value)
             }

@@ -107,6 +107,8 @@ for (let i = 0; i < accordions.length; i++) {
     arrowImg.setAttribute("src", "assets/arrow.png");
     arrowImg.setAttribute("alt", "arrow");
 
+    arrowImg.style.display = "none";
+
     // Add arrow img to arrow div
     arrowElem.appendChild(arrowImg);
 
