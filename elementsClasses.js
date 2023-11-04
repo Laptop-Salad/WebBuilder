@@ -1,23 +1,27 @@
 const nav = document.getElementById("nav");
 const container = document.getElementById("container");
 
+const Element = {
+    elem: '',
+    x: '',
+    y: '',
+    page: '', // null if on canvas, otherwise page id
+}
+
 export class Heading {
-    constructor(elem, fontSize) {
+    constructor(elem, fontSize, page) {        
         this.color = "black";
         this.fontSize = fontSize;
-        this.align = "left";
         this.elem = elem;
         this.text = elem.innerHTML;
         this.x = 0;
         this.y = 0;
         this.position = "static";
+        this.page = page;
     }
 
     updateMapper(key, value) {
         switch (key) {
-            case "align":
-                this.setAlign = value;
-                break;
             case "fontSize":
                 this.setFontSize = value;
                 break;
@@ -36,6 +40,8 @@ export class Heading {
             case "position":
                 this.setPosition = value;
                 break;
+            case "page":
+                this.page = value;
         }
     }
 
@@ -55,13 +61,6 @@ export class Heading {
             "fontSize": this.fontSize,
             "color": this.color,
             "text": this.text
-        }
-    }
-
-    set setAlign(align) {
-        if (["left", "center", "right"].indexOf(align) >= 0) {
-            this.align = align;
-            this.elem.style.textAlign = this.align;
         }
     }
 
@@ -92,12 +91,7 @@ export class Heading {
 
     set setX(value) {
         value = parseInt(value);
-        this.x = value + nav.offsetWidth;
-
-        if (this.x >= nav.offsetWidth + container.offsetWidth) {
-            this.x = nav.offsetWidth + container.offsetWidth - this.elem.offsetWidth;
-        }
-
+        this.x = value;
         this.setPosition = "absolute";
         this.elem.style.left = this.x + "px";
     }
@@ -119,5 +113,9 @@ export class Heading {
                 this.elem.style.position = value;        
             }
         }
+    }
+
+    set setPage(value) {
+        this.page = value;
     }
 } 

@@ -24,3 +24,9 @@ Summary of changes to project will be documented in this file.
 
 ### Fixed
 - When targeting an element the "fontSize" property displayed the text instead.
+
+## 04/11/2023
+
+### Changed
+- Canvas is now "infinite"
+- There is a page on the canvas where if elements are placed in will be included in generated code

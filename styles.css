@@ -5,9 +5,9 @@
 
 body {
     display: grid;
-    grid-template: 1fr 10fr / 1fr 2fr 1fr;
+    grid-template: 1fr 10fr / 1fr 4fr 1fr;
     width: 100%;
-    min-height: 100vh;
+    max-height: 100vh;
     font-family: 'Gabarito', sans-serif;
 }
 
@@ -20,6 +20,16 @@ body {
 #top {
     background-color: #0f0f0f;
     color: white;
+}
+
+#container {
+    background-color: lightgray;
+}
+
+.page {
+    background-color: white;
+    width: 1440px;
+    height: 1024px;
 }
 
 /* Grid */
@@ -72,10 +82,10 @@ body {
 
 /* Nav */
 #nav {
+    box-sizing: border-box;
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
-    z-index: 2;
 }
 
 #nav h3 {
@@ -94,22 +104,36 @@ body {
 
 /* Container */
 #container {
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    z-index: 0;
+    max-height: 100vh;
+    overflow: scroll;
+    padding: 20px;
 }
 
 #container * {
     font-family: serif;
 }
 
+#container > * {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+/* Board */
+#board {
+    width: 1500px;
+    height: 1500px;
+    background-color: lightgray;
+}
+
 /* Advanced */
 #advanced {
-    height: 100vh;
+    box-sizing: border-box;
     padding: 20px;
     box-sizing: border-box;
-    z-index: 2;
 }
 
 #advanced {
