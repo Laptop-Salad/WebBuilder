@@ -28,15 +28,15 @@ const headingsConfig = {
     },
 }
 
-function createHeading (elemName) {
+function createHeading (elemName, pageTarget) {
     let elem;
     elem = document.createElement(elemName);
     elem.innerHTML = headingsConfig[elemName]["text"];
-    return new Heading(elem, headingsConfig[elemName]["fontSize"]);
+    return new Heading(elem, headingsConfig[elemName]["fontSize"], pageTarget);
 }
 
-export function mapElemCreator (elemName) {
+export function mapElemCreator (elemName, pageTarget) {
     if (headings.includes(elemName)) {
-        return createHeading(elemName);
+        return createHeading(elemName, pageTarget);
     }
 }
