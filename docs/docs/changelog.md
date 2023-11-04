@@ -30,3 +30,6 @@ Summary of changes to project will be documented in this file.
 ### Changed
 - Canvas is now "infinite"
 - There is a page on the canvas where if elements are placed in will be included in generated code
+
+### Removed
+- align property temporarily removed as when pressing changing it only aligns after element is no longer targeted and when targeting element again it changes back to default alignment while being targeted.
