@@ -1,118 +1,75 @@
-const nav = document.getElementById("nav");
-const container = document.getElementById("container");
+import { setColor, setFontSize, setText, setX, setY, setPosition } from "./validators.js";
 
 const Element = {
     elem: '',
-    x: '',
-    y: '',
     page: '', // null if on canvas, otherwise page id
 }
 
 export class Heading {
-    constructor(elem, fontSize, page) {        
-        this.color = "black";
-        this.fontSize = fontSize;
+    constructor(elem, page) {        
         this.elem = elem;
-        this.text = elem.innerHTML;
-        this.x = 0;
-        this.y = 0;
-        this.position = "static";
         this.page = page;
     }
 
     updateMapper(key, value) {
         switch (key) {
             case "fontSize":
-                this.setFontSize = value;
+                setFontSize(this.elem, value);
                 break;
             case "color":
-                this.setColor = value;
+                setColor(this.elem, value);
                 break;
             case "text":
-                this.setText = value;
+                setText(this.elem, value);
                 break;
             case "x":
-                this.setX = value;
+                setX(this.elem, value);
                 break;
             case "y":
-                this.setY = value;
+                setY(this.elem, value);
                 break;
             case "position":
-                this.setPosition = value;
+                setPosition(this.elem, value);
                 break;
             case "page":
                 this.page = value;
+                break;
         }
     }
 
-    get getStyle() {
-        return "style='" + 
-        "color: " + this.color + ";" + 
-        "font-size: " + this.fontSize + ";" + 
-        "text-align: " + this.align + ";" + 
-        "position: " + this.position + ";" +
-        "top: " + this.y + ";" + 
-        "left: " + this.x + ";'";
-    }
-
-    get getItems() {
-        return {
-            "align": this.align,
-            "fontSize": this.fontSize,
-            "color": this.color,
-            "text": this.text
-        }
-    }
-
-    set setColor(color) {
-        let strCheck = this.elem.style.color = color;
-        
-        if (strCheck == "") {
-            this.elem.style.color = this.color;
-        } else {
-            this.color = color;
-        }
-    }
-
-    set setFontSize(fontSize) {
-        let strCheck = this.elem.style.fontSize = fontSize + "px";
-
-        if (strCheck == "") {
-            this.elem.style.fontSize = this.fontSize + "px";
-        } else {
-            this.fontSize = fontSize;
-        }
-    }
-
-    set setText(text) {
-        this.text = text;
-        this.elem.innerHTML = this.text;
-    }
-
-    set setX(value) {
-        value = parseInt(value);
-        this.x = value;
-        this.setPosition = "absolute";
-        this.elem.style.left = this.x + "px";
-    }
-
-    set setY(value) {
-        this.y = value;
-        this.setPosition = "absolute";
-        this.elem.style.top = this.y + "px";
-    }
-
-    set setPosition(value) {
-        value = value.toLowerCase();
-
-        let validArgs = ["static", "relative", "fixed", "absolute", "sticky"];
-        
-        for (let i = 0; i < validArgs.length; i++) {
-            if (value == validArgs[i]) {
-                this.position = value;
-                this.elem.style.position = value;        
-            }
-        }
+    getEditableProperties() {
+        return [
+            {
+                "system_name" : "fontSize",
+                "display_name": "Text Size (px)",
+                "value": this.elem.style.fontSize
+            }, 
+            {
+                "system_name": "color",
+                "display_name": "Colour",
+                "value": this.elem.style.color
+            },
+            {
+                "system_name": "text",
+                "display_name": "Text",
+                "value": this.elem.innerHTML
+            },
+            {
+                "system_name": "x",
+                "display_name": "x",
+                "value": this.elem.style.left
+            },
+            {
+                "system_name": "y",
+                "display_name": "y",
+                "value": this.elem.style.top
+            },
+            {
+                "system_name": "position",
+                "display_name": "Position",
+                "value": this.elem.style.position
+            },
+        ]
     }
 
     set setPage(value) {
