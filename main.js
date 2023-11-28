@@ -11,7 +11,6 @@ const codeBox = document.getElementById("codeBox");
 const modal = document.getElementById("modal");
 const modalClose = document.getElementById("modalClose");
 const body = document.getElementById("body");
-const top = document.getElementById("top");
 const board = document.getElementById("board");
 
 // Each element needs a unique id, this is incremented by 1 for each new element
@@ -20,7 +19,7 @@ let IdCount = 0;
 // The current targeted element (border red)
 let currTarget = null;
 
-// Keep track of all elements on canvas
+// Keep track of all elements on canvas: elemId => elem class
 let elemsTracker = {};
 
 // Keep track of a targeted elements style.display value, as when targeting this value is set to inline
@@ -102,32 +101,30 @@ function setTarget(elem) {
     elem.style.display = "inline";
 }
 
-function loadEditor(elem) {
+function loadEditor(elemId) {
     /**
      * Load an elements Element Editor
      */
-    let details = elemsTracker[elem];
-    for (let key in details) {
-        if (key == "elem") {
-            continue;
-        } else if (key == "page") {
-            continue;
-        }
+    let details = elemsTracker[elemId];
+    const editables = details.getEditableProperties();
 
+    for (let num in editables) {
+        let editable = editables[num];
         let input = document.createElement("input");
+
         input.setAttribute("type", "text");
-        input.setAttribute("id", key);
+        input.setAttribute("id", editable.system_name);
 
         input.addEventListener("keydown", function (event) {
             if (event.key === "Enter") {
-                details.updateMapper(key, event.target.value)
+                details.updateMapper(editable.system_name, event.target.value);
             }
         })
 
         let label = document.createElement("label");
-        label.innerHTML = key;
-        label.setAttribute("for", key);
-        input.value = details[key];
+        label.innerHTML = editable.display_name;
+        label.setAttribute("for", editable.system_name);
+        input.value = editable.value;
 
         let container = document.createElement("div");
         container.append(label);
@@ -139,21 +136,21 @@ function loadEditor(elem) {
     let deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = "Delete";
     deleteBtn.addEventListener("click", function () {
-        removeElem(elem);
+        removeElem(elemId);
     });
 
     elemEditor.append(deleteBtn);
 }
 
-function removeElem(elem) {
+function removeElem(elemId) {
     /**
      * Clears target then removes an element from the dom and from elemsTracker
      */
     
     clearTarget();
-    let currElem = elemsTracker[elem].elem;
+    let currElem = elemsTracker[elemId].elem;
     currElem.remove();
-    delete elemsTracker[elem];
+    delete elemsTracker[elemId];
 }
 
 function increasePage() {
@@ -203,33 +200,37 @@ function endMove(event) {
     let details = elemsTracker[currTarget.id];
     details.updateMapper("x", x);
     details.updateMapper("y", y);
-    setElemPage(currTarget);
+    setElemPage();
     clearTarget();
 }
 
-function setElemPage(elem) {
+function setElemPage() {
+    /**
+     * Checks whether the currently targeted element currTarget is within the page boundaries
+     * @return {null}
+     */
     let elemDetails = elemsTracker[currTarget.id];
 
     // Past page width
-    if (elem.offsetLeft > pageTarget.offsetWidth) {
+    if (currTarget.offsetLeft > pageTarget.offsetWidth) {
         elemDetails.page = null;
         return;
     } 
 
     // Before page (width)
-    if (elem.offsetLeft < pageTarget.offsetLeft) {
+    if (currTarget.offsetLeft < pageTarget.offsetLeft) {
         elemDetails.page = null;
         return;
     }
 
     // Above page (height)
-    if (elem.offsetTop < pageTarget.offsetTop) {
+    if (currTarget.offsetTop < pageTarget.offsetTop) {
         elemDetails.page = null;
         return;
     }
 
     // Below page (height)
-    if (elem.offsetTop > pageTarget.offsetHeight) {
+    if (currTarget.offsetTop > pageTarget.offsetHeight) {
         elemDetails.page = null;
         return;
     }
@@ -244,41 +245,35 @@ function targetElem(event) {
     elemEditor.innerHTML = "";
 
     clearTarget();
-
     setTarget(event.target);
-
     loadEditor(currTarget.id);
+
     currTarget.removeEventListener("click", targetElem);
-
-
     document.addEventListener("click", checkClickOutside);
-
     currTarget.addEventListener("mousedown", startMove);
 }
 
-function store(elem) {
+function store(elemDetails) {
     /**
      * Create and store a new element created by the user
      */
 
 
-    elemsTracker[elem.elem.id] = elem; 
-
-    return elem;
+    elemsTracker[elemDetails.elem.id] = elemDetails; 
 }
 
-function addJSData(elem) {
-    if (elem) {
-        elem.elem.id = IdCount;
+function addJSData(elemDetails) {
+    if (elemDetails) {
+        elemDetails.elem.id = IdCount;
         IdCount += 1
         
-        elem.elem.addEventListener("click", targetElem);
+        elemDetails.elem.addEventListener("click", targetElem);
     }
 }
 
 // Go through every button in nav and add event listeners
-for (let elem = 0; elem < elemButtons.length; elem++) {
-    let currElem = elemButtons[elem];
+for (let button = 0; button < elemButtons.length; button++) {
+    let currElem = elemButtons[button];
 
     currElem.addEventListener("click", function () {
         let newElem = mapElemCreator(currElem.dataset.name, pageTarget.id);
