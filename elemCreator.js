@@ -31,6 +31,8 @@ const headingsConfig = {
 function createHeading (elemName, pageTarget) {
     /**
      * Initialises a heading element and creates its element class
+     * @param {String} elemName The name of the type of element to create
+     * @param {String} pageTarget Which page the element will be placed
      * @return {Heading}
      */
     let elem;
@@ -46,7 +48,9 @@ function createHeading (elemName, pageTarget) {
 
 export function mapElemCreator (elemName, pageTarget) {
     /**
-     * Finds the element initialiser 
+     * Finds the matching element initialiser
+     * @param {String} elemName The name of the type of element to create
+     * @param {String} pageTarget Which page the element will be placed 
      * @return {Heading}
      */
     if (headings.includes(elemName)) {
