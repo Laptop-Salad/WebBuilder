@@ -6,6 +6,9 @@ const Element = {
 }
 
 export class Heading {
+    /**
+     * Handles elements h1-h6
+     */
     constructor(elem, page) {        
         this.elem = elem;
         this.page = page;

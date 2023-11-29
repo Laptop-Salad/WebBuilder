@@ -153,7 +153,10 @@ function removeElem(elemId) {
     delete elemsTracker[elemId];
 }
 
-function increasePage() {
+function increaseCanvas() {
+    /**
+     * Increases canvas width/height if element is near border
+     */
     if (currTarget.offsetLeft + currTarget.offsetWidth + 10 > board.offsetWidth) {
         board.style.width = board.offsetWidth + currTarget.offsetWidth + 10 + "px";
     }
@@ -164,6 +167,9 @@ function increasePage() {
 }
 
 function moveElement(event) {
+    /**
+     * Handles when an element is moved by updating x, y coords and checking whether to increase canvas size
+     */
     let idPageTarget = "#" + pageTarget.id;
 
     let offset = $(idPageTarget).offset();
@@ -175,7 +181,7 @@ function moveElement(event) {
     details.updateMapper("x", x);
     details.updateMapper("y", y);
 
-    increasePage();
+    increaseCanvas();
 
     elemEditor.innerHTML = "";
 
@@ -183,7 +189,9 @@ function moveElement(event) {
 }
 
 function startMove() {  
-    
+    /**
+     * Prepares to move an element
+     */
     document.getElementById("container").addEventListener("mousemove", moveElement);
     currTarget.removeEventListener("click", targetElem);
     currTarget.removeEventListener("mousedown", startMove);
@@ -191,6 +199,9 @@ function startMove() {
 }
 
 function endMove(event) {
+    /**
+     * Ends the elements move and clears target
+     */
     let idPageTarget = "#" + pageTarget.id;
 
     let offset = $(idPageTarget).offset();
@@ -258,11 +269,13 @@ function store(elemDetails) {
      * Create and store a new element created by the user
      */
 
-
     elemsTracker[elemDetails.elem.id] = elemDetails; 
 }
 
 function addJSData(elemDetails) {
+    /**
+     * Adds the event listener to be able to target and move element and sets its id
+     */
     if (elemDetails) {
         elemDetails.elem.id = IdCount;
         IdCount += 1

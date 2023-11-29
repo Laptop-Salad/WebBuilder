@@ -1,6 +1,6 @@
 export function getCode(elemsTracker) {
     /**
-     * Generate code
+     * Generate code from elements in elemsTracker
      */
     let str = `
     &lt;!DOCTYPE html&gt;
