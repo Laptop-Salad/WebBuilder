@@ -293,5 +293,6 @@ for (let button = 0; button < elemButtons.length; button++) {
         addJSData(newElem)
         store(newElem);
         pageTarget.append(newElem.elem);
+        newElem.elem.click();
     })
 }
