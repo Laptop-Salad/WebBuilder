@@ -2,16 +2,34 @@
 
 Summary of changes to project will be documented in this file.
 
-## 17/10/2023
+## 7/12/2023
 
 ### Added
-- First working version
+- Feature to zoom in/out of canvas
 
-## 19/10/2023
+## 29/11/2023
 
 ### Added
-- Elements can now be dragged in container
-- Colour Palette and favicon
+- When an element is created it is targeted.
+- Docstrings added where necessary
+
+## 28/11/2023
+
+### Added
+- Rules for variables names to distinquish between element itself and element class.
+
+### Changed
+- Changed the way elements are tracked. Individual element properties are no longer tracked.
+- Elements now always spawn at (0, 0).
+
+## 04/11/2023
+
+### Changed
+- Canvas is now "infinite"
+- There is a page on the canvas where if elements are placed in will be included in generated code
+
+### Removed
+- align property temporarily removed as when pressing changing it only aligns after element is no longer targeted and when targeting element again it changes back to default alignment while being targeted.
 
 ## 23/10/2023
 
@@ -25,11 +43,14 @@ Summary of changes to project will be documented in this file.
 ### Fixed
 - When targeting an element the "fontSize" property displayed the text instead.
 
-## 04/11/2023
+## 19/10/2023
 
-### Changed
-- Canvas is now "infinite"
-- There is a page on the canvas where if elements are placed in will be included in generated code
+### Added
+- Elements can now be dragged in container
+- Colour Palette and favicon
 
-### Removed
-- align property temporarily removed as when pressing changing it only aligns after element is no longer targeted and when targeting element again it changes back to default alignment while being targeted.
+## 17/10/2023
+
+### Added
+- First working version
+
