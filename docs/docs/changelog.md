@@ -6,6 +6,7 @@ Summary of changes to project will be documented in this file.
 
 ### Added
 - Feature to zoom in/out of canvas
+- Use delete key to delete a targeted element
 
 ## 29/11/2023
 
