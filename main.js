@@ -13,6 +13,8 @@ const modalClose = document.getElementById("modalClose");
 const body = document.getElementById("body");
 const board = document.getElementById("board");
 
+let scale = 1;
+
 // Each element needs a unique id, this is incremented by 1 for each new element
 let IdCount = 0;
 
@@ -31,8 +33,8 @@ let editorsOpen = true;
 // The page that elements are being added to
 let pageTarget = document.getElementById("page1");
 
-// To handle ctrl + \ - for hiding side panels
 body.addEventListener("keydown", function (event) {
+    // To handle ctrl + \ - for hiding side panels
     if (event.code === "IntlBackslash" && event.ctrlKey) {
         if (editorsOpen) {
             nav.style.display = "none";
@@ -47,6 +49,27 @@ body.addEventListener("keydown", function (event) {
             canvasContainer.style.gridColumn = "2";
             editorsOpen = true;
         }
+    // Detect shift + to zoom in
+    } else if (event.code === "Equal" && event.shiftKey) {
+        scale += 0.1;
+
+        if (scale + 0.1 < 400) {
+            scale += 0.1;
+            board.style.width /= scale;
+            board.style.height /= scale;
+        }
+
+        board.style.transform = 'scale(' + scale + ')';
+    // Detect shift - to zoom out
+    }  else if (event.code === "Minus" && event.shiftKey) {
+
+        if (scale - 0.1 > 0) {
+            scale -= 0.1;
+            board.style.width /= scale;
+            board.style.height /= scale;
+        }
+        
+        board.style.transform = 'scale(' + scale + ')';
     }
 })
 
@@ -178,8 +201,8 @@ function moveElement(event) {
 
     let details = elemsTracker[currTarget.id];
 
-    details.updateMapper("x", x);
-    details.updateMapper("y", y);
+    details.updateMapper("x", x / scale);
+    details.updateMapper("y", y / scale);
 
     increaseCanvas();
 
@@ -209,8 +232,8 @@ function endMove(event) {
     let y = parseInt(event.pageY - offset.top);
 
     let details = elemsTracker[currTarget.id];
-    details.updateMapper("x", x);
-    details.updateMapper("y", y);
+    details.updateMapper("x", x / scale);
+    details.updateMapper("y", y / scale);
     setElemPage();
     clearTarget();
 }
