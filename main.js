@@ -35,7 +35,7 @@ let pageTarget = document.getElementById("page1");
 
 body.addEventListener("keydown", function (event) {
     // To handle ctrl + \ - for hiding side panels
-    if (event.code === "IntlBackslash" && event.ctrlKey) {
+    if (event.code == "IntlBackslash" && event.ctrlKey) {
         if (editorsOpen) {
             nav.style.display = "none";
             advanced.style.display = "none";
@@ -50,7 +50,7 @@ body.addEventListener("keydown", function (event) {
             editorsOpen = true;
         }
     // Detect shift + to zoom in
-    } else if (event.code === "Equal" && event.shiftKey) {
+    } else if (event.code == "Equal" && event.shiftKey) {
         scale += 0.1;
 
         if (scale + 0.1 < 400) {
@@ -61,7 +61,7 @@ body.addEventListener("keydown", function (event) {
 
         board.style.transform = 'scale(' + scale + ')';
     // Detect shift - to zoom out
-    }  else if (event.code === "Minus" && event.shiftKey) {
+    }  else if (event.code == "Minus" && event.shiftKey) {
 
         if (scale - 0.1 > 0) {
             scale -= 0.1;
@@ -70,7 +70,9 @@ body.addEventListener("keydown", function (event) {
         }
         
         board.style.transform = 'scale(' + scale + ')';
-    }
+    } else if (event.code == "Delete" && currTarget) {
+        removeElem(currTarget.id);
+    } 
 })
 
 modalClose.addEventListener("click", function () {
