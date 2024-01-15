@@ -122,6 +122,8 @@ function setTarget(elem) {
      */
     currTarget = elem;
     elem.style.border = "2px solid red";
+
+    let divContainer = document.createElement("div")
     originalDisplay = elem.style.display;
     elem.style.display = "inline";
 }

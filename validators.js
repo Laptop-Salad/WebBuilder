@@ -29,6 +29,16 @@ export function setY(elem, value) {
     elem.style.top = value + "px";
 }
 
+export function setWidth(elem, value) {
+    setPosition = "absolute";
+    elem.style.width = value + "px";
+}
+
+export function setHeight(elem, value) {
+    setPosition = "absolute";
+    elem.style.height = value + "px";
+}
+
 export function setPosition(elem, value) {
     value = value.toLowerCase();
 

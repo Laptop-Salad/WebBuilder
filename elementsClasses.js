@@ -1,4 +1,4 @@
-import { setColor, setFontSize, setText, setX, setY, setPosition } from "./validators.js";
+import { setColor, setFontSize, setText, setX, setY, setWidth, setHeight, setPosition } from "./validators.js";
 
 const Element = {
     elem: '',
@@ -106,6 +106,12 @@ export class Paragraph {
             case "y":
                 setY(this.elem, value);
                 break;
+            case "width":
+                setWidth(this.elem, value);
+                break;
+            case "height":
+                setHeight(this.elem, value);
+                break;
             case "position":
                 setPosition(this.elem, value);
                 break;
@@ -141,6 +147,16 @@ export class Paragraph {
                 "system_name": "y",
                 "display_name": "y",
                 "value": this.elem.style.top
+            },
+            {
+                "system_name": "width",
+                "display_name": "Width",
+                "value": this.elem.style.width
+            },
+            {
+                "system_name": "height",
+                "display_name": "Height",
+                "value": this.elem.style.height
             },
             {
                 "system_name": "position",
