@@ -1,17 +1,27 @@
-# WebBuilder
-A  website builder built with html, css, js and jQuery.
+# Webbuilder
 
-<img width="947" alt="image" src="https://github.com/Laptop-Salad/WebBuilder/assets/80591698/fc5ffff2-89c4-4112-a0ae-39983639404a">
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
 
-## Redesign
-Currently this is a simple prototype of a drag and drop website builder but development has come to a halt due to the fact that the structure of the code makes it difficult to add new features and the design of the UI is not very appealing.
+## Development server
 
-### New UI Design
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-<img width="369" alt="image" src="https://github.com/Laptop-Salad/WebBuilder/assets/80591698/047d7f79-a1f4-45bf-8846-7c402c7a4730">
+## Code scaffolding
 
-Main changes:
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-- Using the colours from the logo.
-- Custom scrollbars.
-- A different font: Krona One.
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
